@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="body {.css">
+</head>
+
+  <body>
+    <div class="container">
+      <img src="" alt="" id="img1" />
+      <p id="nome"></p>
+      <p id="versus">VS</p>
+      <img src="" alt="" id="img2" />
+      <p id="nome2"></p>
+    </div>
+    <script>
+      let imagem = document.querySelector("#img1");
+      let nome = document.querySelector("#nome");
+      let imagem2 = document.querySelector("#img2");
+      let nome2 = document.querySelector("#nome2");
+
+      function equipe1(logo,nomeEquipe){
+        imagem.setAttribute("src",logo);
+        nome.innerHTML = nomeEquipe;
+      }
+      function equipe2(logo,nomeEquipe){
+        imagem2.setAttribute("src",logo);
+        nome2.innerHTML = nomeEquipe;
+      }
+      
+      let key = "2c6e53892b4fd81a84173e6497aecc629135c4a2003d6dd8ba8edf90a02f0d3a";
+      function mostrarEquipes(idEquipe,fucionEquipe){
+
+      fetch(`https://allsportsapi.com/api/football/?&met=Teams&teamId=${idEquipe}&APIkey=${key}`)
+      .then(response =>response.json())
+      .then((equipes) => {
+        fucionEquipe(
+        equipes.result[0].team_logo,
+        equipes.result[0].team_name)
+      });
+      }
+      
+      mostrarEquipes(2627,equipe1);
+      
+      mostrarEquipes(2621,equipe2);
+
+    </script>
+</html>
